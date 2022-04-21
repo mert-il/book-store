@@ -5,7 +5,7 @@ from sqlalchemy_utils import create_database, database_exists
 
 db = SQLAlchemy()
 
-def initDatabase(app):
+def init_database(app):
     engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
     if not database_exists(engine.url):
         create_database(engine.url)
