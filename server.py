@@ -6,6 +6,7 @@ import os
 import distutils.util 
 import config 
 from services.database import init_database
+from services.email import init_mail
 from views.website import website
 from views.admin import admin 
 from models.admin import Admin
@@ -25,6 +26,7 @@ def create_app():
         app.config.from_object(config.DevelopmentConfig)
     
     init_database(app)
+    init_mail(app)
 
     app.register_blueprint(website)
     app.register_blueprint(admin)

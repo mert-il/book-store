@@ -1,5 +1,5 @@
-from distutils.debug import DEBUG
 import os 
+import distutils.util
 
 class BaseConfig(object):
     DEBUG = False 
@@ -18,6 +18,12 @@ class ProductionConfig(BaseConfig):
     os.environ.get("POSTGRES_PORT"), 
     os.environ.get("POSTGRES_DATABASE")
     )
+    MAIL_SERVER = os.environ.get("MAIL_SERVER")
+    MAIL_PORT = os.environ.get("MAIL_PORT")
+    MAIL_USE_SSL = bool(distutils.util.strtobool(os.environ.get("MAIL_USE_SSL", "True")))
+    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
+    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+
 
 class DevelopmentConfig(BaseConfig):
     DEVELOPTMENT=True
