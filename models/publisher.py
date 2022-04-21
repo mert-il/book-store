@@ -1,9 +1,4 @@
-from .base_model import BaseModel, db 
+from services.database import db
 
-class Publisher(BaseModel):
-    __tablename__ = "publisher"
-    name = db.Column(db.String(255))
-    books = db.relationship("Book", backref="book", lazy=True)
-
-    def __init__(self, name):
-        self.name = name
+class Publisher(db.Document):
+    name = db.StringField(max_length=255)

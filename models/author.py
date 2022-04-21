@@ -1,10 +1,5 @@
-from .base_model import BaseModel, db
+from services.database import db
 
-class Author(BaseModel):
-    firstname = db.Column(db.String(255))
-    lastname = db.Column(db.String(255))
-    books = db.relationship("Book", backref="book", lazy=True)
-
-    def __init__(self, firstname, lastname):
-        self.firstname = firstname 
-        self.lastname = lastname
+class Author(db.Document):
+    firstname = db.StringField(max_length=255)
+    lastname = db.StringField(max_length=255)

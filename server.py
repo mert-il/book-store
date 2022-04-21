@@ -9,12 +9,6 @@ from services.database import init_database
 from services.email import init_mail
 from views.website import website
 from views.admin import admin 
-from models.admin import Admin
-from models.user import User
-from models.book import Book
-from models.author import Author
-from models.publisher import Publisher
-from models.genre import Genre 
 
 def create_app():
     app = Flask(__name__, static_folder="static", static_url_path="")

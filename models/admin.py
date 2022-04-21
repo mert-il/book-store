@@ -1,10 +1,5 @@
-from .base_model import BaseModel, db
+from services.database import db
 
-class Admin(BaseModel):
-    __tablename__ = "admin"
-    email = db.Column(db.String(255))
-    password_hash = db.Column(db.Text)
-
-    def __init__(self, email, password_hash):
-        self.email = email
-        self.password_hash = password_hash
+class Admin(db.Document):
+    email = db.StringField(max_length=255)
+    password_hash = db.StringField()
