@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.login-container {
+    margin-top: 5vh;
+}
+.login-form {
+    margin: 0 10vw;
+}
+.login-symbol {
+    font-size: 6vw;
+}

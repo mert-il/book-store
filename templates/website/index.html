@@ -1,8 +1,10 @@
-{% include "./base.html" %}
+{% extends "./base.html" %}
 
-{% block head %}
-<title>Book Store</title>
-{% endblock %}
+{% block title %}Bookstore{% endblock %}
 
 {% block content %}
+{% include "website/nav.html" %}
+<div class="container">
+    <h1>welcome to the bookstore...</h1>
+</div>
 {% endblock %}

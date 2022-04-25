@@ -1,4 +1,4 @@
 from hashlib import sha256
 
-def generate_hash(password):
-    return sha256(password.encode("utf-8")).hexdigest()
+def generate_hash(value):
+    return sha256(value.encode("utf-8")).hexdigest()
