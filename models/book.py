@@ -11,3 +11,4 @@ class Book(db.Document):
     genre = db.ReferenceField(Genre)
     blurb = db.StringField()
     price = db.FloatField()
+    published_date = db.StringField()

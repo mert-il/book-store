@@ -6,9 +6,9 @@ import os
 import distutils.util 
 import config 
 from services.database import init_database
-from services.email import init_mail
+from services.mail import init_mail
 from views.website import website
-from views.admin import admin 
+from views.admin import admin
 
 def create_app():
     app = Flask(__name__, static_folder="static", static_url_path="")
