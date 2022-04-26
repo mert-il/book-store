@@ -1,6 +1,7 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, request, url_for
 from models.user import User
-from controllers.user import create_user
+from controllers.user import create_user, signin_user
+from flask_login import login_required
 
 website = Blueprint("website", __name__, url_prefix="")
 
@@ -12,6 +13,17 @@ def index():
 def login():
     return render_template("website/login.html")
 
+@website.route("/login_user", methods=["POST"])
+def login_user():
+    try:
+        if request.method == "POST":
+            email = request.form.get("email")
+            password = request.form.get("password")
+            signin_user(email, password)
+            return redirect(url_for("website.index"))
+    except Exception as e:
+        return str(e)
+
 @website.route("/signup")
 def signup():
     return render_template("website/signup.html")
@@ -20,7 +32,7 @@ def signup():
 def signup_user():
     try:
         if request.method == "POST":
-            user =  User(
+            user = User(
                 firstname = request.form.get("firstname"),
                 lastname = request.form.get("lastname"),
                 email = request.form.get("email"),
@@ -32,5 +44,10 @@ def signup_user():
             )
             create_user(user)
         return redirect(url_for("website.login"))
-    except Exception as ex:
-        return str(ex)
+    except Exception as e:
+        return str(e)
+
+@website.route("/books")
+@login_required
+def books():
+    return "books"

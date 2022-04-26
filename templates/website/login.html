@@ -6,7 +6,7 @@
 {% include "website/nav.html" %}
 <div class="container login-container">
     <div class="login-form bg-light p-3">
-        <form action="" method="post">
+        <form action="{{ url_for('website.login_user') }}" method="post">
             <div class="row">
                 <div class="col-md-6  text-center login-symbol">
                     <i class="fa fa-users"></i>
@@ -14,10 +14,10 @@
                 <div class="col-md-6 ">
                     <h3 class="text-center mb-3">Login</h3>
                     <div class="mb-3">
-                        <input type="email" name="email" id="" class="form-control" placeholder="Email address" required>
+                        <input type="email" name="email" class="form-control" placeholder="Email address" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" name="password" id="" class="form-control" placeholder="Password" required>
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
                     </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">Login</button>
