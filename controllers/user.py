@@ -1,15 +1,13 @@
 import os
 from models.user import User
-from services.hash import generate_hash
+from services.encryption import bcrypt
 from services.mail import send_mail_queued
 from services.exception import BasicException
-from services.auth import login_manager
-from flask_login import login_user
 
 def create_user(user):
     try:
         if User.objects(email=user.email).first() == None:
-            user.password = str(generate_hash(user.password))
+            user.password = bcrypt.generate_password_hash(user.password)
             user.save()
 
             mail_msg = f"Hello {user.firstname} {user.lastname}, welcome to the bookstore\nYour new account was successfully created!"
@@ -27,14 +25,10 @@ def delete_user(user_id):
     except Exception as e:
         raise BasicException(message = str(e), HTTPCode = 400)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.objects.get(id=user_id).first()
-
 def signin_user(email, password):
     try:
-        user = User.objects(email=email, password=generate_hash(password)).first()
+        user = User.objects(email=email, password=bcrypt.generate_password_hash(password)).first()
         if user:
-            login_user(user)
+            pass 
     except Exception as e:
         raise BasicException(message = str(e), HTTPCode = 400)

@@ -1,7 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, url_for
 from models.user import User
 from controllers.user import create_user, signin_user
-from flask_login import login_required
 
 website = Blueprint("website", __name__, url_prefix="")
 
@@ -48,6 +47,5 @@ def signup_user():
         return str(e)
 
 @website.route("/books")
-@login_required
 def books():
     return "books"

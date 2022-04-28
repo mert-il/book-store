@@ -6,4 +6,5 @@ Flask-Mail==0.9.1
 Flask-Executor==0.10.0
 psycopg2-binary==2.9.3
 flask-mongoengine==1.0.0
-Flask-Login==0.6.0
+Flask-Bcrypt==1.0.1
+Flask-JWT-Extended==4.3.1

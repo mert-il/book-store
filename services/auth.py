@@ -1,6 +1,6 @@
-from flask_login import LoginManager
+from flask_jwt_extended import JWTManager
 
-login_manager = LoginManager()
+jwt = JWTManager()
 
-def init_login_manager(app):
-    login_manager.init_app(app)
+def init_jwt(app):
+    jwt.init_app(app)
