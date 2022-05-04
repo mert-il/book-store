@@ -6,6 +6,6 @@ class User(db.Document):
     email = db.StringField(max_length=255) 
     password = db.StringField() 
     street = db.StringField(max_length=255)
-    house_number = db.StringField(max_length=10)
+    housenumber = db.StringField(max_length=10)
     city = db.StringField(max_length=255)
-    zip_code = db.StringField(max_length=10)
+    zipcode = db.StringField(max_length=10)

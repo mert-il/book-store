@@ -1,0 +1,42 @@
+{% extends "./base.html" %}
+
+{% block title %}Bookstore{% endblock %}
+
+{% block content %}
+{% include "website/nav.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mb-3">
+                <h2>{{ book.title }}</h2>
+            </div>
+            <div class="mb-3">
+                <div class="mb-1">
+                    <h4>Information</h4>
+                </div>
+                <div class="mb-1">Author: {{ book.author }}</div>
+                <div class="mb-1">Genre: {{ book.genre }}</div>
+                <div class="mb-1">Publisher: {{ book.publisher }}</div>
+                <div class="mb-1">Isban: {{ book.isban }}</div>
+                <div class="mb-1">Publishing date: {{ book.published_date }}</div>
+            </div>
+            <div>
+                <div class="mb-1">
+                    <h4>Desciption</h4>
+                </div>
+                <div>
+                    {{ book.blurb }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-1">
+                Price <strong>{{ book.price }} $</strong>
+            </div>
+            <form action="/" method="post">
+                <button type="submit" class="form-control btn btn-primary"><i class="fa fa-shopping-bag"></i> Buy Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

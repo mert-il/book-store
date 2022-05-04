@@ -16,7 +16,7 @@ def create_app():
     app = Flask(__name__, static_folder="static", static_url_path="")
     minify(app=app, html=True, js=True, cssless=True, static=True)
 
-    if bool(distutils.util.strtobool(os.environ.get("SERVER_PRODUCTION"))) == True:
+    if bool(distutils.util.strtobool(os.environ.get("SERVER_PRODUCTION"))):
         app.config.from_object(config.ProductionConfig)
     else:
         app.config.from_object(config.DevelopmentConfig)

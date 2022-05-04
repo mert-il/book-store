@@ -2,12 +2,14 @@ body {
     margin: 0;
     padding: 0;
 }
-.login-container {
+.container {
     margin-top: 5vh;
 }
 .login-form {
-    margin: 0 10vw;
+    min-width: 30vw;
 }
-.login-symbol {
-    font-size: 6vw;
+.book {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1em;
 }
