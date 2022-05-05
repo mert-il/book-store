@@ -9,7 +9,7 @@
         {% for book in books %}
             <div class="col-md-5 book m-1 p-4 bg-light">
                 <div class="book-title"><strong>{{ book.title }}</strong> <br>by <em>{{ book.author }}</em></div>
-                <div class="book-price"><a href="/book?isban={{ book.isban }}" class="btn btn-primary">{{ book.price }}</a></div>
+                <div class="book-price"><a href="/book?id={{ book.id }}" class="btn btn-primary">{{ book.price }}</a></div>
             </div>
         {% endfor %}
     </div>

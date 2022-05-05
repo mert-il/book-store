@@ -1,8 +1,8 @@
 from flask import Blueprint, redirect, render_template, request, url_for
-from controllers.book_controller import get_all_books, get_book
 from models.book import Book
 from models.user import User
-from controllers.user_controller import create_user, get_user
+from logic.user import UserLogic
+from logic.book import BookLogic
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 website = Blueprint("website", __name__, url_prefix="")
@@ -25,7 +25,7 @@ def login_user():
         if request.method == "POST":
             email = request.form.get("email")
             password = request.form.get("password")
-        user = get_user(email, password)
+        user = UserLogic().get(email, password)
         access_token = create_access_token(identity=user.id)
         return redirect(url_for("website.index"))
     except Exception as e:
@@ -49,19 +49,19 @@ def signup_user():
                 city = request.form.get("city"),
                 zipcode = request.form.get("zip_code")
             )
-            create_user(user)
+            UserLogic().create(user)
         return redirect(url_for("website.login"))
     except Exception as e:
         return str(e)
 
 @website.route("/books")
 def books():
-    return render_template("website/books.html", books=get_all_books())
+    return render_template("website/books.html", books=BookLogic().get_all())
 
 @website.route("/book")
 def book():
     try:
-        isban = request.args.get("isban")
-        return render_template("website/bookview.html", book=get_book(isban))
+        id = request.args.get("id")
+        return render_template("website/bookview.html", book=BookLogic().get(id))
     except Exception as e:
         return str(e)
