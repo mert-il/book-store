@@ -2,14 +2,13 @@ body {
     margin: 0;
     padding: 0;
 }
-.container {
-    margin-top: 5vh;
-}
 .login-form {
     min-width: 30vw;
 }
-.book {
-    display: flex;
-    justify-content: space-between;
-    border-radius: 1em;
+.genre-link {
+    text-decoration: none;
+    color: black;
+}
+.genre-link:hover {
+    border: 1px solid blue;
 }

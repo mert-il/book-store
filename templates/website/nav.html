@@ -2,7 +2,7 @@
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="/"><i class="fa fa-book"></i> BOOKSTORE</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,11 +17,11 @@
                     <a class="nav-link" href="{{ url_for('website.books') }}">Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Genres</a>
+                    <a class="nav-link" href="#">Categories</a>
                 </li>
             </ul>
             <form class="d-flex">
-                <a href="{{ url_for('website.account') }}" class="btn btn-outline-primary">Account <i class="fa fa-sign-in"></i></a>
+                <a href="{{ url_for('website.account') }}" class="btn btn-outline-primary">My Account <i class="fa fa-sign-in"></i></a>
             </form>
         </div>
     </div>

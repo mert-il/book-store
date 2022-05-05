@@ -5,7 +5,7 @@ from services.mail import send_mail_queued
 from services.exception import BasicException
 
 class UserLogic(object):
-    def create(user):
+    def create(self, user):
         try:
             if User.objects(email=user.email).first() == None:
                 user.password = bcrypt.generate_password_hash(user.password).decode("utf-8")
@@ -15,7 +15,7 @@ class UserLogic(object):
         except Exception as e:
             raise BasicException(message = str(e), HTTPCode = 400) 
 
-    def update(user_id, firstname, lastname, email, street, housenumber, city, zipcode):
+    def update(self, user_id, firstname, lastname, email, street, housenumber, city, zipcode):
         try:
             user = User.objects.get(id=user_id).first()
             user.update(
@@ -30,7 +30,7 @@ class UserLogic(object):
         except Exception as e:
             raise BasicException(message = str(e), HTTPCode = 400) 
 
-    def delete(user_id):
+    def delete(self, user_id):
         try:
             user = User.objects.get(id=user_id).first()
             user.delete()
@@ -39,14 +39,14 @@ class UserLogic(object):
         except Exception as e:
             raise BasicException(message = str(e), HTTPCode = 400)
 
-    def get(email, password):
+    def get(self, email, password):
         try:
             user = User.objects(email=email, password=bcrypt.generate_password_hash(password).decode("utf-8")).first()
             return user 
         except Exception as e:
             raise BasicException(message = str(e), HTTPCode = 400)
 
-    def change_password(user_id, old_password, new_password):
+    def change_password(self, user_id, old_password, new_password):
         try:
             user = User.objects.get(id=user_id).first()
             old_password_hash = bcrypt.generate_password_hash(old_password).decode("utf-8")

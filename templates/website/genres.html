@@ -1,0 +1,14 @@
+{% extends "./base.html" %}
+
+{% block title %}Bookstore{% endblock %}
+
+{% block content %}
+{% include "website/nav.html" %}
+<div class="container mt-3">
+    <div class="row d-flex justify-content-center">
+        {% for genre in genres %}
+            <a href="/books/{{ genre.name }}" class="col-md-10 p-3 m-1 bg-light text-center genre-link"><h3>{{ genre.name }}</h3></a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

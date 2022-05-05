@@ -58,6 +58,13 @@ def signup_user():
 def books():
     return render_template("website/books.html", books=BookLogic().get_all())
 
+@website.route("/book/<genre>")
+def book(genre):
+    try:
+        return render_template("website/books.html", books=BookLogic().get_by_genre(genre))
+    except Exception as e:
+        return str(e)
+
 @website.route("/book")
 def book():
     try:
