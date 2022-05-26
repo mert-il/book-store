@@ -6,7 +6,7 @@
 {% include "website/nav.html" %}
 <div class="container d-flex justify-content-center">
     <div class="login-form bg-light p-3">
-        <form action="{{ url_for('website.signup_user') }}" method="post">
+        <form action="/signup_user" method="post">
             <h3 class="text-center mb-3">Sign Up</h3>
             <div class="mb-3">
                 <input type="text" name="firstname" class="form-control" placeholder="Firstname">
@@ -36,7 +36,7 @@
                 <button type="submit" class="btn btn-primary form-control">Create Account</button>
             </div>
             <div class="mb-3">
-                <p>Already have an account? <a href="{{ url_for('website.login') }}">Login</a></p>
+                <p>Already have an account? <a href="/login">Login</a></p>
             </div>
         </form>
     </div>

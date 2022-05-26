@@ -32,7 +32,7 @@ class ProductionConfig(BaseConfig):
 class DevelopmentConfig(BaseConfig):
     DEVELOPTMENT = True
     DEBUG = True
-    HOST = "localhost"
+    HOST = "0.0.0.0"
     PORT = "8080"
     SECRET_KEY = "secretkey"
     JWT_SECRET_KEY = "jwtsecretkey"

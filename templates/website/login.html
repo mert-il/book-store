@@ -6,7 +6,7 @@
 {% include "website/nav.html" %}
 <div class="container d-flex justify-content-center">
     <div class="login-form bg-light p-3">
-        <form action="{{ url_for('website.login_user') }}" method="post">
+        <form action="/login_user" method="post">
             <h3 class="text-center mb-3">Login</h3>
             <div class="mb-3">
                 <input type="email" name="email" class="form-control" placeholder="Email address" required>
@@ -18,7 +18,7 @@
                 <button type="submit" class="btn btn-primary form-control">Login</button>
             </div>
             <div class="mb-3">
-                <p>Don't have an account? <a href="{{ url_for('website.signup') }}">Register</a></p>
+                <p>Don't have an account? <a href="/signup">Register</a></p>
             </div>
         </form>
     </div>

@@ -8,7 +8,7 @@ import config
 from services.database import init_database
 from services.mail import init_mail
 from services.encryption import init_bcrypt
-from services.auth import init_jwt
+from services.auth import init_auth
 from views.website import website
 from views.admin import admin
 
@@ -25,7 +25,7 @@ def create_app():
     init_database(app)
     init_mail(app)
     init_bcrypt(app)
-    init_jwt(app)
+    init_auth(app)
 
     #register views
     app.register_blueprint(website)

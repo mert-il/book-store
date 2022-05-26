@@ -1,61 +1,33 @@
-import os
 from models.user import User
 from services.encryption import bcrypt
-from services.mail import send_mail_queued
-from services.exception import BasicException
+from .base_logic import BaseLogic
 
-class UserLogic(object):
-    def create(self, user):
-        try:
-            if User.objects(email=user.email).first() == None:
-                user.password = bcrypt.generate_password_hash(user.password).decode("utf-8")
-                user.save()
-                mail_msg = f"Hello {user.firstname} {user.lastname}, welcome to the bookstore\nYour new account was successfully created!"
-                send_mail_queued(os.environ.get("MAIL_SENDER"), [user.email], "Your new bookstore account", mail_msg)
-        except Exception as e:
-            raise BasicException(message = str(e), HTTPCode = 400) 
-
-    def update(self, user_id, firstname, lastname, email, street, housenumber, city, zipcode):
-        try:
-            user = User.objects.get(id=user_id).first()
-            user.update(
-                firstname = firstname,
-                lastname = lastname,
-                email = email,
-                street = street,
-                housenumber = housenumber,
-                city = city,
-                zipcode = zipcode
-            )
-        except Exception as e:
-            raise BasicException(message = str(e), HTTPCode = 400) 
-
-    def delete(self, user_id):
-        try:
-            user = User.objects.get(id=user_id).first()
-            user.delete()
-            mail_msg = f"Hello {user.firstname} {user.lastname},\nYour account was successfully deleted!"
-            send_mail_queued(os.environ.get("MAIL_SENDER"), [user.email], "Bookstore account deleted", mail_msg) 
-        except Exception as e:
-            raise BasicException(message = str(e), HTTPCode = 400)
+class UserLogic(BaseLogic):
+    def save(self, model):
+        if User.objects(email=model.email).first() == None:
+            model.password = bcrypt.generate_password_hash(model.user.password).decode("utf-8")
+            model.save()
 
     def get(self, email, password):
-        try:
-            user = User.objects(email=email, password=bcrypt.generate_password_hash(password).decode("utf-8")).first()
-            return user 
-        except Exception as e:
-            raise BasicException(message = str(e), HTTPCode = 400)
+        password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+        user = User.objects(email=email, password=password_hash).first()
+        return user
 
-    def change_password(self, user_id, old_password, new_password):
-        try:
-            user = User.objects.get(id=user_id).first()
-            old_password_hash = bcrypt.generate_password_hash(old_password).decode("utf-8")
-            new_password_hash = bcrypt.generate_password_hash(new_password).decode("utf-8")
-            if bcrypt.check_password_hash(user.password, old_password_hash):
-                if not bcrypt.check_password_hash(user.password, new_password_hash):
-                    user.update(password = new_password_hash)
-                    return True 
-            else:
-                return False 
-        except Exception as e:
-            raise BasicException(message = str(e), HTTPCode = 400)
+    def get_by_id(self, id):
+        return User.objects.get_or_404(id=id)
+
+    def update(self, id, model):
+        user = User.objects.get(id=id)
+        user.update(
+            firstname = model.firstname,
+            latname = model.lastname,
+            email = model.email,
+            street = model.street,
+            housenumber = model.housenumber,
+            city = model.city,
+            zipcode = model.zipcode
+        )
+
+    def delete(self, id):
+        user = User.objects.get_or_404(id=id)
+        user.delete()
