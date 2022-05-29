@@ -11,8 +11,9 @@
                 <tr>
                     <th scope="col">
                         <div class="row">
-                            <div class="col-md-6">Book</div>
-                            <div class="col-md-4">Author</div>
+                            <div class="col-md-5">Book</div>
+                            <div class="col-md-3">Author</div>
+                            <div class="col-md-2">Genre</div>
                             <div class="col-md-2">Action</div>
                         </div>
                     </th>
@@ -23,8 +24,9 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <div class="col-md-6 pt-2"><a href="/book?id={{ book.id }}">{{ book.title }}</a></div>
-                                <div class="col-md-4 pt-2">{{ book.author.name }}</div>
+                                <div class="col-md-5 pt-2"><a href="/book?id={{ book.id }}" class="no-link">{{ book.title }}</a></div>
+                                <div class="col-md-3 pt-2">{{ book.author.name }}</div>
+                                <div class="col-md-2 pt-2"><a href="/books?genre={{ book.genre.name }}" class="no-link">{{ book.genre.name }}</a></div>
                                 <div class="col-md-2">
                                     <a href="/pay?id={{ book.id }}" class="form-control btn btn-primary">{{ book.price }} €</a>
                                 </div>

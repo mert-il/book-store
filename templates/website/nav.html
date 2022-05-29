@@ -22,7 +22,8 @@
             </ul>
             <form class="d-flex">
                 {% if current_user.is_active %}
-                    <a href="/account" class="btn btn-primary">{{ current_user.firstname }} {{ current_user.lastname }} <i class="fa fa-user"></i></a>
+                    <a href="/account" class="btn btn-primary" style="margin-right: 0.5vw;">{{ current_user.firstname }} {{ current_user.lastname }} <i class="fa fa-user"></i></a>
+                    <a href="/logout" class="btn btn-primary">Logout <i class="fa fa-sign-out"></i></a>
                 {% else %}
                     <a href="/login" class="btn btn-primary">Login <i class="fa fa-sign-in"></i></a>
                 {% endif %}

@@ -1,15 +1,24 @@
-from models.book import Book 
+from models.book import Book
 
 class BookLogic(object):
     def save(self, book):
-        if Book.objects(isban=book.isban).first() == None:
-            book.save() 
+        try:
+            if Book.objects(isban=book.isban).first() == None:
+                book.save() 
+        except Exception as exception:
+            raise exception
 
-    def get_all(self) -> list:
-        return Book.objects() 
+    def get_all(self):
+        try:
+            return Book.objects() 
+        except Exception as exception:
+            raise exception
 
-    def get_by_id(self, id) -> Book:
+    def get_by_id(self, id):
         return Book.objects.get_or_404(id=id)
 
-    def get_by_genre(self, genre) -> list:
-        return Book.objects(genre=genre)
+    def get_by_genre(self, genre):
+        try:
+            return Book.objects(genre=genre)
+        except Exception as exception:
+            raise exception

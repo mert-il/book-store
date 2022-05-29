@@ -1,6 +1,5 @@
 import os
 from datetime import datetime
-import re
 from flask import Blueprint, render_template, request, redirect
 from logic.order import OrderLogic
 from logic.user import UserLogic
@@ -39,7 +38,7 @@ def user_login():
     login_user(user)
     return redirect("/")
 
-@website.route("logout")
+@website.route("/logout")
 def user_logout():
     logout_user()
     return redirect("/")
@@ -63,10 +62,6 @@ def user_signup():
     user_logic.save(user)
     return redirect("/")
 
-@website.route("/account")
-def account():
-    return "your account settings"
-
 @website.get("/books")
 def books():
     genre_name = request.args.get("genre")
@@ -84,6 +79,41 @@ def book_view():
 @website.route("/genres")
 def genres():
     return render_template("website/genres.html", genres=genre_logic.get_all())
+
+@website.route("/account")
+@login_required
+def account():
+    return render_template("website/account.html")
+
+@website.route("/order-history")
+@login_required
+def order_history():
+    return render_template("website/order-history.html", orders=order_logic.get_by_user(current_user))
+
+@website.route("change-password")
+@login_required
+def change_password():
+    return render_template("website/change-password.html")
+
+@website.post("user-change-password")
+@login_required
+def user_change_password():
+    pass 
+
+
+@website.post("/update-user")
+def user_update():
+    user_id = current_user.id
+    new_user_data = User(
+        firstname = request.form.get("firstname"),
+        lastname = request.form.get("lastname"),
+        email = request.form.get("email"),
+        street = request.form.get("street"),
+        housenumber = request.form.get("housenumber"),
+        city = request.form.get("city"),
+        zipcode = request.form.get("zipcode")
+    )
+    user_logic.update(user_id, new_user_data)
 
 @website.get("/pay")
 @login_required
