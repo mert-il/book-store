@@ -4,14 +4,36 @@
 
 {% block content %}
 {% include "website/nav.html" %}
-<div class="container">
+<div class="container mt-3">
     <div class="row">
-        {% for book in books %}
-            <div class="col-md-5 book m-1 p-4 bg-light">
-                <div class="book-title"><strong>{{ book.title }}</strong> <br>by <em>{{ book.author }}</em></div>
-                <div class="book-price"><a href="/book?id={{ book.id }}" class="btn btn-primary">{{ book.price }}</a></div>
-            </div>
-        {% endfor %}
+        <table class="col-12 table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <div class="row">
+                            <div class="col-md-6">Book</div>
+                            <div class="col-md-4">Author</div>
+                            <div class="col-md-2">Action</div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6 pt-2"><a href="/book?id={{ book.id }}">{{ book.title }}</a></div>
+                                <div class="col-md-4 pt-2">{{ book.author.name }}</div>
+                                <div class="col-md-2">
+                                    <a href="/pay?id={{ book.id }}" class="form-control btn btn-primary">{{ book.price }} €</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

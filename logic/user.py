@@ -1,31 +1,30 @@
 from models.user import User
-from services.encryption import bcrypt
-from .base_logic import BaseLogic
+from services.encryption import generate_hash
 
-class UserLogic(BaseLogic):
-    def save(self, model):
-        if User.objects(email=model.email).first() == None:
-            model.password = bcrypt.generate_password_hash(model.user.password).decode("utf-8")
-            model.save()
+class UserLogic(object):
+    def save(self, user):
+        if User.objects(email=user.email).first() == None:
+            user.password = generate_hash(user.password)
+            user.save()
 
-    def get(self, email, password):
-        password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+    def get(self, email, password) -> User:
+        password_hash = generate_hash(password)
         user = User.objects(email=email, password=password_hash).first()
         return user
 
-    def get_by_id(self, id):
+    def get_by_id(self, id) -> User:
         return User.objects.get_or_404(id=id)
 
-    def update(self, id, model):
+    def update(self, id, user):
         user = User.objects.get(id=id)
         user.update(
-            firstname = model.firstname,
-            latname = model.lastname,
-            email = model.email,
-            street = model.street,
-            housenumber = model.housenumber,
-            city = model.city,
-            zipcode = model.zipcode
+            firstname = user.firstname,
+            latname = user.lastname,
+            email = user.email,
+            street = user.street,
+            housenumber = user.housenumber,
+            city = user.city,
+            zipcode = user.zipcode
         )
 
     def delete(self, id):

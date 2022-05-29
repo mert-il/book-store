@@ -1,6 +1,4 @@
-from flask_bcrypt import Bcrypt
+from hashlib import sha256
 
-bcrypt = Bcrypt()
-
-def init_bcrypt(app):
-    bcrypt.init_app(app)
+def generate_hash(value):
+    return sha256(value.encode()).hexdigest()

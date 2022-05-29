@@ -2,6 +2,7 @@ from services.database import db
 from models.author import Author
 from models.publisher import Publisher
 from models.genre import Genre
+from datetime import datetime 
 
 class Book(db.Document):
     title = db.StringField(max_length=255)
@@ -11,4 +12,4 @@ class Book(db.Document):
     genre = db.ReferenceField(Genre)
     blurb = db.StringField()
     price = db.FloatField()
-    published_date = db.StringField()
+    published_date = db.DateTimeField()

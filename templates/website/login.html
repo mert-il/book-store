@@ -4,9 +4,9 @@
 
 {% block content %}
 {% include "website/nav.html" %}
-<div class="container d-flex justify-content-center">
-    <div class="login-form bg-light p-3">
-        <form action="/login_user" method="post">
+<div class="container mt-3 d-flex justify-content-center">
+    <div class="login-form bg-dark text-white p-3">
+        <form action="/login-user" method="post">
             <h3 class="text-center mb-3">Login</h3>
             <div class="mb-3">
                 <input type="email" name="email" class="form-control" placeholder="Email address" required>
