@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, flash, render_template, request, redirect
 from logic.order import OrderLogic
 from logic.user import UserLogic
 from logic.book import BookLogic
@@ -36,11 +36,13 @@ def user_login():
     password = request.form.get("password")
     user = user_logic.get(email, password)
     login_user(user)
+    flash(f"Welcome back, {user.firstname} {user.lastname}", "success")
     return redirect("/")
 
 @website.route("/logout")
 def user_logout():
     logout_user()
+    flash("You have been logged out!", "success")
     return redirect("/")
 
 @website.route("/signup")
@@ -98,7 +100,13 @@ def change_password():
 @website.post("user-change-password")
 @login_required
 def user_change_password():
-    pass 
+    user_id = current_user.id 
+    old_password = request.form.get("old_password")
+    new_password = request.form.get("new_password_1")
+    new_password_repeat = request.form.get("/new_password_2")
+    if new_password == new_password_repeat:
+        user_logic.change_password(user_id, old_password, new_password)
+    return redirect("/account") 
 
 
 @website.post("/update-user")
@@ -113,6 +121,7 @@ def user_update():
         city = request.form.get("city"),
         zipcode = request.form.get("zipcode")
     )
+    flash("Your Account has been updated!", "success")
     user_logic.update(user_id, new_user_data)
 
 @website.get("/pay")

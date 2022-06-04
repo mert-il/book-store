@@ -7,7 +7,7 @@
 <div class="container mt-3">
     <div class="row d-flex justify-content-center">
         {% for genre in genres %}
-            <a href="/books?genre={{ genre.name }}" class="col-md-10 p-2 m-1 bg-dark text-center genre-link"><h3 class="text-white">{{ genre.name }}</h3></a>
+            <a href="/books?genre={{ genre.name }}" class="col-md-10 p-2 m-1 border rounded bg-light text-center link-dec"><h3>{{ genre.name }}</h3></a>
         {% endfor %}
     </div>
 </div>

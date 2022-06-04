@@ -5,22 +5,11 @@ body {
 .login-form {
     min-width: 30vw;
 }
-.genre-link {
-    text-decoration: none;
-    color: black;
-}
-.genre-link:hover {
-    border: 1px solid blue;
-}
 .list-group-item {
     border: none;
     border-radius: 0;
 }
-.list-group-item a {
+.link-dec {
     text-decoration: none;
     color: black;
-}
-.no-link {
-    text-decoration: none;
-    color: white;
 }
