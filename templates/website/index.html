@@ -4,6 +4,14 @@
 
 {% block content %}
 {% include "website/nav.html" %}
-<div class="container">
+<div class="container mt-3">
+    <h1 class="text-primary">WELCOME TO THE BOOKSTORE</h1>
+    <div class="row">
+        {% if not current_user.is_active %}
+        <div class="col-12  border rounded bg-light text-center link-dec p-5 mt-3"><a href="/login" class="link-dec"><h2>Create a new account</h2></a></div>
+        <div class="col-12 text-center mt-3 h3">OR</div>
+        {% endif %}
+        <div class="col-12  border rounded bg-light text-center link-dec p-5 mt-3"><a href="/books" class="link-dec"><h2>Browse the books</h2></a></div>
+    </div>
 </div>
 {% endblock %}

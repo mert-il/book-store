@@ -8,6 +8,7 @@ import config
 from services.database import init_database
 from services.mail import init_mail
 from services.auth import init_auth
+from services.session import init_session
 from views.website import website
 from views.admin import admin
 
@@ -24,6 +25,7 @@ def create_app():
     init_database(app)
     init_mail(app)
     init_auth(app)
+    init_session(app)
 
     #register views
     app.register_blueprint(website)

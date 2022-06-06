@@ -26,7 +26,7 @@ class UserLogic(object):
             user = User.objects.get(id=id)
             user.update(
                 firstname=new_user_data.firstname,
-                latname=new_user_data.lastname,
+                lastname=new_user_data.lastname,
                 email=new_user_data.email,
                 street=new_user_data.street,
                 housenumber=new_user_data.housenumber,

@@ -1,0 +1,40 @@
+{% extends "./base.html" %}
+
+{% block title %}Bookstore{% endblock %}
+
+{% block content %}
+{% include "website/nav.html" %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/account" class="link-dec">Personal information</a></li>
+                <li class="list-group-item"><a href="/order-history" class="link-dec">Order history</a></li>
+                <li class="list-group-item"><a href="/change-password" class="link-dec">Change password</a></li>
+                <li class="list-group-item bg-light border rounded"><a href="/delete" class="link-dec">Delete account</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete Account</button>
+            
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete your account?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="/user-delete" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

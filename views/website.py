@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from flask import Blueprint, flash, render_template, request, redirect
+from flask import Blueprint, flash, render_template, request, redirect, session
 from logic.order import OrderLogic
 from logic.user import UserLogic
 from logic.book import BookLogic
@@ -9,7 +9,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from models.order import Order
 from services.auth import login_manager
 from models.user import User
-from services.mail import send_mail_queued
+from services.mail import send_mail, send_mail_queued
 
 website = Blueprint("website", __name__, url_prefix="")
 
@@ -24,6 +24,7 @@ def load_user(user_id):
 
 @website.route("/")
 def index():
+    session["shopping_card"] = list()
     return render_template("website/index.html")
 
 @website.route("/login")
@@ -36,7 +37,7 @@ def user_login():
     password = request.form.get("password")
     user = user_logic.get(email, password)
     login_user(user)
-    flash(f"Welcome back, {user.firstname} {user.lastname}", "success")
+    flash(f"Welcome back, {user.firstname} {user.lastname}!", "success")
     return redirect("/")
 
 @website.route("/logout")
@@ -76,6 +77,7 @@ def books():
 @website.get("/book")
 def book_view():
     id = request.args.get("id") 
+    session["shopping_card"].append(book_logic.get_by_id(id))
     return render_template("website/bookview.html", book=book_logic.get_by_id(id))
 
 @website.route("/genres")
@@ -103,13 +105,18 @@ def user_change_password():
     user_id = current_user.id 
     old_password = request.form.get("old_password")
     new_password = request.form.get("new_password_1")
-    new_password_repeat = request.form.get("/new_password_2")
+    new_password_repeat = request.form.get("new_password_2")
     if new_password == new_password_repeat:
         user_logic.change_password(user_id, old_password, new_password)
+        flash("Your password was successfully changed!", "success")
+    else:
+        flash("An error occurred while changing the password!", "danger")
+        return redirect("/change-password")
     return redirect("/account") 
 
 
-@website.post("/update-user")
+@website.post("/update")
+@login_required
 def user_update():
     user_id = current_user.id
     new_user_data = User(
@@ -121,8 +128,26 @@ def user_update():
         city = request.form.get("city"),
         zipcode = request.form.get("zipcode")
     )
-    flash("Your Account has been updated!", "success")
     user_logic.update(user_id, new_user_data)
+    flash("Your Account has been updated!", "success")
+    return redirect("/account")
+
+@website.route("/delete")
+@login_required
+def delete_account():
+    return render_template("website/delete.html")
+
+@website.post("/user-delete")
+@login_required
+def user_delete_account():
+    user = current_user
+    user_logic.delete(user.id)
+    flash("Your account was successfully deleted!", "success")
+    mail_message = f"""Hello {user.firstname} {user.lastname},
+    your account was successfully deleted!
+    """
+    send_mail_queued(os.environ.get("MAIL_USERNAME"), user.email, "Bookstore: Delete Account", mail_message)
+    redirect("/logout")
 
 @website.get("/pay")
 @login_required
