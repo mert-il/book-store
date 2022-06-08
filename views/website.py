@@ -19,7 +19,7 @@ genre_logic = GenreLogic()
 order_logic = OrderLogic()
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id: str) -> User:
     return user_logic.get_by_id(user_id)
 
 @website.route("/")

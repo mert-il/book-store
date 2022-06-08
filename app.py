@@ -8,11 +8,10 @@ import config
 from services.database import init_database
 from services.mail import init_mail
 from services.auth import init_auth
-from services.session import init_session
 from views.website import website
 from views.admin import admin
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__, static_folder="static", static_url_path="")
     minify(app=app, html=True, js=True, cssless=True, static=True)
 
@@ -25,7 +24,6 @@ def create_app():
     init_database(app)
     init_mail(app)
     init_auth(app)
-    init_session(app)
 
     #register views
     app.register_blueprint(website)
