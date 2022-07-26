@@ -1,7 +1,7 @@
 from models.author import Author 
 
 class AuthorLogic(object):
-    def save(self, author: Author):
+    def save(self, author: Author) -> None:
         try:
             if Author.objects(name=author.name).first() == None:
                 author.save()

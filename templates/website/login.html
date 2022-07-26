@@ -5,22 +5,23 @@
 {% block content %}
 {% include "website/nav.html" %}
 <div class="container mt-3 d-flex justify-content-center">
-    <div class="login-form border rounded bg-light text-dark p-3">
-        <form action="/login-user" method="post">
-            <h3 class="text-center mb-3">Login</h3>
-            <div class="mb-3">
-                <input type="email" name="email" class="form-control" placeholder="Email address" required>
+    <form action="/login-user" method="post">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Login</h3>
             </div>
-            <div class="mb-3">
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <div class="card-body p-3">
+                <div class="row p-3">
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Email address" required>
+                    <input type="password" name="password" class="form-control mb-3" placeholder="Password" required>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
             </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary form-control">Login</button>
-            </div>
-            <div class="mb-3">
+            <div class="card-footer pt-3">
+                
                 <p>Don't have an account? <a href="/signup">Register</a></p>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

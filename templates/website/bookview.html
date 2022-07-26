@@ -4,37 +4,28 @@
 
 {% block content %}
 {% include "website/nav.html" %}
-<div class="container bg-light border rounded mt-3 p-3">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="mb-3">
-                <h2>{{ book.title }}</h2>
-            </div>
-            <div class="mb-3">
-                <div class="mb-1">
-                    <h4>Information</h4>
-                </div>
-                <div class="mb-1">Author: {{ book.author.name }}</div>
-                <div class="mb-1">Genre: {{ book.genre.name }}</div>
-                <div class="mb-1">Publisher: {{ book.publisher.name }}</div>
-                <div class="mb-1">Isban: {{ book.isban }}</div>
-                <div class="mb-1">Publishing date: {{ book.published_date.strftime("%d.%m.%Y") }}</div>
-            </div>
-            <div>
-                <div class="mb-1">
-                    <h4>Desciption</h4>
-                </div>
-                <div>
-                    {{ book.blurb }}
-                </div>
-            </div>
+<div class="container mt-3 p-3">
+    <div class="card " style="width: 100%;">
+        <div class="card-header">
+            <h3 class="text-center">{{ book.title }}</h3>
         </div>
-        <div class="col-md-4">
+        <div class="card-body p-3">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Author:</strong> {{ book.author.name }}</li>
+                <li class="list-group-item"><strong>Genre:</strong> {{ book.genre.name }}</li>
+                <li class="list-group-item"><strong>Publisher:</strong> {{ book.publisher.name }}</li>
+                <li class="list-group-item"><strong>Isban:</strong> {{ book.isban }}</li>
+                <li class="list-group-item"><strong>Publishing date:</strong> {{ book.published_date.strftime("%d %B %Y") }}</li>
+                <li class="list-group-item"><strong>Blurb:</strong> <br> {{ book.blurb }}</li>
+              </ul>
+        </div>
+        <div class="card-footer">
             <div class="mb-1">
-                Price: <strong>{{ book.price }} €</strong>
+                <strong>Price:</strong> {{ book.price }} €
             </div>
-            <a href="/pay?id={{ book.id }}" class="form-control btn btn-primary"><i class="fa fa-shopping-bag"></i> Buy Now</a>
+            <a href="/pay?id={{ book.id }}" class="btn btn-primary"><i class="fa fa-shopping-bag"></i> Buy Now</a>
         </div>
     </div>
+
 </div>
 {% endblock %}

@@ -9,7 +9,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from models.order import Order
 from services.auth import login_manager
 from models.user import User
-from services.mail import send_mail, send_mail_queued
+from services.mail import send_mail_queued
 
 website = Blueprint("website", __name__, url_prefix="")
 
@@ -36,9 +36,14 @@ def user_login():
     email = request.form.get("email")
     password = request.form.get("password")
     user = user_logic.get(email, password)
-    login_user(user)
-    flash(f"Welcome back, {user.firstname} {user.lastname}!", "success")
-    return redirect("/")
+    if user != None:
+        login_user(user)
+        flash(f"Welcome back, {user.firstname} {user.lastname}!", "success")
+        return redirect("/")
+    else:
+        flash(f"Login failed!", "danger")
+        return redirect("/login")
+
 
 @website.route("/logout")
 def user_logout():
@@ -92,12 +97,12 @@ def account():
 @website.route("/order-history")
 @login_required
 def order_history():
-    return render_template("website/order-history.html", orders=order_logic.get_by_user(current_user))
+    return render_template("website/order_history.html", orders=order_logic.get_by_user(current_user))
 
 @website.route("change-password")
 @login_required
 def change_password():
-    return render_template("website/change-password.html")
+    return render_template("website/change_password.html")
 
 @website.post("user-change-password")
 @login_required

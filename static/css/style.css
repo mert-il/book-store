@@ -2,13 +2,10 @@ body {
     margin: 0;
     padding: 0;
 }
-.login-form {
-    min-width: 30vw;
-}
-.list-group-item {
+/*.list-group-item {
     border: none;
     border-radius: 0;
-}
+}*/
 .link-dec {
     text-decoration: none;
     color: black;

@@ -5,40 +5,50 @@
 {% block content %}
 {% include "website/nav.html" %}
 <div class="container mt-3 d-flex justify-content-center">
-    <div class="login-form bg-light border rounded p-3">
-        <form action="/signup_user" method="post">
-            <h3 class="text-center mb-3">Sign Up</h3>
-            <div class="mb-3">
-                <input type="text" name="firstname" class="form-control" placeholder="Firstname">
+    <form action="/signup-user" method="post">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Sign Up</h3>
             </div>
-            <div class="mb-3">
-                <input type="text" name="lastname" class="form-control" placeholder="Lastname">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="firstname" class="form-control" placeholder="Firstname">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="lastname" class="form-control" placeholder="Lastname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email address">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="street" class="form-control" placeholder="Street">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="house_number" class="form-control" placeholder="Housenumber">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="city" class="form-control" placeholder="City">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="zip_code" class="form-control" placeholder="Zip Code">
+                    </div>
+                </div>
+                <button type="submit" class="form-control btn btn-primary">Create Account</button>
             </div>
-            <div class="mb-3">
-                <input type="email" name="email" class="form-control" placeholder="Email address">
-            </div>
-            <div class="mb-3">
-                <input type="password" name="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="mb-3">
-                <input type="text" name="street" class="form-control" placeholder="Street">
-            </div>
-            <div class="mb-3">
-                <input type="text" name="house_number" class="form-control" placeholder="Housenumber">
-            </div>
-            <div class="mb-3">
-                <input type="text" name="city" class="form-control" placeholder="City">
-            </div>
-            <div class="mb-3">
-                <input type="text" name="zip_code" class="form-control" placeholder="Zip Code">
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary form-control">Create Account</button>
-            </div>
-            <div class="mb-3">
+            <div class="card-footer pt-3">
                 <p>Already have an account? <a href="/login">Login</a></p>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 from models.genre import Genre 
 
 class GenreLogic(object):
-    def save(self, genre: Genre):
+    def save(self, genre: Genre) -> None:
         try:
             if Genre.objects(name=genre.name).first() == None:
                 genre.save()

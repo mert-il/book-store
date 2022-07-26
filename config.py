@@ -14,7 +14,7 @@ class BaseConfig(object):
 
 class ProductionConfig(BaseConfig):
     PRODUCTION = True 
-    HOST = "0.0.0.0"
+    HOST = os.environ.get("HOST")
     PORT = os.environ.get("PORT")
     SECRET_KEY = os.environ.get("SECRET_KEY")
     MONGODB_SETTINGS = {

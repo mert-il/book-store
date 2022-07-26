@@ -2,7 +2,7 @@ from models.book import Book
 from models.genre import Genre
 
 class BookLogic(object):
-    def save(self, book: Book):
+    def save(self, book: Book) -> None:
         try:
             if Book.objects(isban=book.isban).first() == None:
                 book.save() 

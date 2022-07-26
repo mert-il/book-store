@@ -1,7 +1,7 @@
 from models.publisher import Publisher
 
 class PublisherLogic(object):
-    def save(self, publisher: Publisher):
+    def save(self, publisher: Publisher) -> None:
         try:
             if Publisher.objects(name=publisher.name).first() == None:
                 publisher.save()

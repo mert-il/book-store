@@ -21,7 +21,7 @@ class UserLogic(object):
     def get_by_id(self, id: str) -> User:
         return User.objects.get_or_404(id=id)
 
-    def update(self, id: str, new_user_data: User):
+    def update(self, id: str, new_user_data: User) -> None:
         try:
             user = User.objects.get(id=id)
             user.update(
@@ -36,11 +36,11 @@ class UserLogic(object):
         except Exception as exception:
             raise exception
 
-    def delete(self, id: str):
+    def delete(self, id: str) -> None:
         user = User.objects.get_or_404(id=id)
         user.delete()
 
-    def change_password(self, id: str, old_password: str, new_password: str):
+    def change_password(self, id: str, old_password: str, new_password: str) -> None:
         try:
             old_password_hash = generate_hash(old_password)
             new_password_hash = generate_hash(new_password)

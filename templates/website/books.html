@@ -5,37 +5,30 @@
 {% block content %}
 {% include "website/nav.html" %}
 <div class="container mt-3">
-    <div class="row">
-        <table class="col-12 table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">
-                        <div class="row">
-                            <div class="col-md-5">Book</div>
-                            <div class="col-md-3">Author</div>
-                            <div class="col-md-2">Genre</div>
-                            <div class="col-md-2">Action</div>
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in books %}
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-5 pt-2"><a href="/book?id={{ book.id }}" class="link-dec">{{ book.title }}</a></div>
-                                <div class="col-md-3 pt-2">{{ book.author.name }}</div>
-                                <div class="col-md-2 pt-2"><a href="/books?genre={{ book.genre.name }}" class="link-dec">{{ book.genre.name }}</a></div>
-                                <div class="col-md-2">
-                                    <a href="/pay?id={{ book.id }}" class="form-control btn btn-primary">{{ book.price }} €</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">Author</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <th scope="row"><a href="/book?id={{ book.id }}" class="link-dec">{{ book.title }}</a></th>
+                <td>{{ book.author.name }}</td>
+                <td><a href="/books?genre={{ book.genre.name }}" class="link-dec">{{ book.genre.name }}</a></td>
+                <td>{{ book.price }} €</td>
+                <td>
+                    <a href="/pay?id={{ book.id }}" class=" mr-1">Buy</a>
+                    <a href="/pay?id={{ book.id }}" class="">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

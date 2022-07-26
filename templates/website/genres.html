@@ -5,10 +5,20 @@
 {% block content %}
 {% include "website/nav.html" %}
 <div class="container mt-3">
-    <div class="row d-flex justify-content-center">
-        {% for genre in genres %}
-            <a href="/books?genre={{ genre.name }}" class="col-md-10 p-2 m-1 border rounded bg-light text-center link-dec"><h3>{{ genre.name }}</h3></a>
-        {% endfor %}
-    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Genre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for genre in genres %}
+            <tr>
+                <td><a href="/books?genre={{ genre.name }}" class="link-dec d-flex justify-content-center">{{ genre.name }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
